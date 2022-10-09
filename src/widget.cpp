@@ -14,9 +14,7 @@ Widget::Widget(QWidget *parent) :
     m_series(new QtCharts::QLineSeries)
 {
     QChartView *chartView = new QChartView(m_chart);
-    chartView->setMinimumSize(800, 600);
     m_chart->addSeries(m_series);
-    m_series = new QLineSeries();
     m_series->append(0, 6);
     m_series->append(2, 4);
     QValueAxis *axisX = new QValueAxis;
@@ -24,7 +22,7 @@ Widget::Widget(QWidget *parent) :
     axisX->setLabelFormat("%g");
     axisX->setTitleText("Samples");
     QValueAxis *axisY = new QValueAxis;
-    axisY->setRange(-1, 1);
+    axisY->setRange(0, 10);
     axisY->setTitleText("Audio level");
     m_chart->addAxis(axisX, Qt::AlignBottom);
     m_series->attachAxis(axisX);
