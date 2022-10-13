@@ -8,7 +8,7 @@
 #include <filesystem>
 #include <thread>
 
-#include "widget.h"
+#include "plot2d.h"
 
 static QWidget *loadUiFile(QWidget *parent, const std::string& path)
 {
@@ -30,23 +30,22 @@ int main(int argc, char **argv)
   QPushButton *button2 = new QPushButton("asdasd");
   layout->addWidget(button1);
   layout->addWidget(button2);
-  Widget *plot = new Widget;
+  gui::PlotWidget* plot = new gui::PlotWidget(nullptr, "xlabel", "ylabel", "title");
+
   layout->addWidget(plot);
   ui->show();
   
   using namespace std::chrono_literals;
-  auto lambda = [](QLineSeries *series){
+  auto lambda = [](gui::PlotWidget *widget){
     int x = 3;
-    while(true)
-    {
+      gui::PlotWidget::PlotData data = {{1,2},{2,5},{3,4}};
+      widget->UpdateXData(data);
       std::this_thread::sleep_for(1000ms);
-      series->append(x++, 6);
-      series->append(x++, 4);
+      data.push_back({4,4});
+      data.push_back({5,7});
+      widget->UpdateXData(data);
       std::this_thread::sleep_for(1000ms);
-      series->append(x++, 1);
-      series->append(x++, 2);
-    }
   };
-  std::thread t1(lambda, plot->GetSeriesData());
+  std::thread t1(lambda, plot);
   return app.exec();
 }

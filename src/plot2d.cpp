@@ -1,11 +1,11 @@
 #include "plot2d.h"
 
-#include <qt5/QList>
+#include <qt5/QtCore/QList>
 
 namespace gui
 {
 
-PlotWidget::PlotWidget(QWidget *parent, const std::string& xLabel, const std::string& yLabel, const std::string& title) :
+PlotWidget::PlotWidget(QWidget *parent, const std::string xLabel, const std::string yLabel, const std::string title) :
   QWidget(parent),
   m_chart(new QtCharts::QChart),
   m_series(new QtCharts::QLineSeries),
@@ -45,22 +45,29 @@ void PlotWidget::SetYAxisRange(int lowerBound, int upperBound)
   m_axisY->setRange(m_lowerBound, m_upperBound);
 }
 
-void PlotWidget::UpdateXData(const PlotData& plotData)
+void PlotWidget::UpdateXData(const PlotWidget::PlotData& plotData)
 {
   // generate QList<QPointF>
   QList<QPointF> data;
   for(const auto& dataPoint : plotData)
   {
-    data.push_back(dataPoint.first, dataPoint.second);
+    data.push_back({dataPoint.first, dataPoint.second});
   }
 
   // update chart data
   m_series->replace(data);
 }
 
-const PlotData& PlotWidget::GetXData() const
+const PlotWidget::PlotData PlotWidget::GetXData() const
 {
-  return m_series->points();
+  const QList<QPointF> points = m_series->points();
+  PlotData data;
+  for(const auto& point : points)
+  {
+    data.push_back({point.x(), point.y()});
+  }
+
+  return data;
 }
 
 

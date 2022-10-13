@@ -16,13 +16,13 @@ namespace gui
 class PlotWidget : public QWidget
 {
 public:
-  using PlotData = std::pair<float,float>;
+  using PlotData = std::vector<std::pair<float,float>>;
 public:
-  PlotWidget(QWidget *parent, const std::string& xLabel, const std::string& yLabel, const std::string& title);
+  PlotWidget(QWidget *parent, const std::string xLabel, const std::string yLabel, const std::string title);
   void SetXAxisRange(int leftBound, int rigthBound);
   void SetYAxisRange(int lowerBound, int upperBound);
   void UpdateXData(const PlotData& data);
-  const PlotData& GetXData() const; 
+  const PlotData GetXData() const; 
 
 private:
   QLineSeries *m_series;  
