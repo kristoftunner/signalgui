@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QVBoxLayout" name="layout"/>
+     <layout class="QHBoxLayout" name="layout"/>
     </item>
    </layout>
   </widget>

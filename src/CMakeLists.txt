@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 
 find_package(Qt5 COMPONENTS Widgets UiTools Charts REQUIRED)
-add_executable(${PROJECT_NAME} app.cpp plot2d.cpp)
+
+file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+
+add_executable(${PROJECT_NAME} ${sources})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::UiTools Qt5::Charts pthread)
 target_include_directories(${PROJECT_NAME} 
@@ -11,4 +14,5 @@ target_include_directories(${PROJECT_NAME}
   /usr/include/x86_64-linux-gnu/qt5/QtCore
   ${CMAKE_CURRENT_SOURCE_DIR}
 )
-target_compile_options(${PROJECT_NAME} PUBLIC -std=gnu++17)
+
+target_compile_options(${PROJECT_NAME} PUBLIC -std=gnu++17 -lstdc++fs -ggdb)
