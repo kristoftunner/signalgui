@@ -30,6 +30,10 @@ Application::Application(QWidget *parent)
   layout->addWidget(button1);
   layout->addWidget(button2);
   m_plot = new gui::PlotWidget(nullptr, "xlabel", "ylabel", "title");
+  
+  Ref<SignalGenerator> signalSource;
+  signalSource.reset(new SignalGenerator());
+  m_plot->SetSignalGenerator(signalSource);
 
   layout->addWidget(m_plot);
   ui->show();

@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include "plot2d.h"
+#include "plot_widget.h"
 
 namespace gui
 {
@@ -14,7 +13,7 @@ public:
   PlotWidget* GetPlotWidget(){return m_plot;}
 
 private:
-  PlotWidget *m_plot;
+  PlotWidget* m_plot;
 };
 
 } // namespace gui

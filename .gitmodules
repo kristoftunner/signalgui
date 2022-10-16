@@ -1,0 +1,3 @@
+[submodule "ext/kfr"]
+	path = ext/kfr
+	url = git@github.com:kfrlib/kfr.git

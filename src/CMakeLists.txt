@@ -6,7 +6,7 @@ file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_executable(${PROJECT_NAME} ${sources})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::UiTools Qt5::Charts pthread)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::UiTools Qt5::Charts pthread kfr)
 target_include_directories(${PROJECT_NAME} 
   PRIVATE 
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets

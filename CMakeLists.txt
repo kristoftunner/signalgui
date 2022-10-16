@@ -4,6 +4,7 @@ project(signalgui CXX)
 include(cmake/defines.cmake)
 
 # build dependecies
+add_subdirectory(ext/kfr)
 
 # build the lib
 add_subdirectory(src)
