@@ -6,6 +6,8 @@
 #include <qt5/QtWidgets/QWidget>
 #include <qt5/QtCharts/QLineSeries>
 #include <qt5/QtCharts/QValueAxis>
+#include <qt5/QtCore/QObject>
+
 #include <kfr/base.hpp>
 
 namespace gui
@@ -37,16 +39,20 @@ public:
 */
 class PlotWidget : public QWidget
 {
+Q_OBJECT
 public:
   PlotWidget(QWidget *parent, const std::string xLabel, const std::string yLabel, const std::string title);
   void SetXAxisRange(int leftBound, int rigthBound);
   void SetYAxisRange(int lowerBound, int upperBound);
   void ReplacePlotData(const PlotData& data);
   const PlotData GetPlotData() const;
-  void GenerateDataFromSource(const SignalGenerator::SignalType& type); 
   void SetSignalGenerator(Ref<SignalGenerator> generator){m_signalSource = generator;}
+  void GenerateDataFromSource();
 
+public slots:
+  void SelectSignalSource(SignalGenerator::SignalType type);
 private:
+  SignalGenerator::SignalType m_signalType;
   Ref<SignalGenerator> m_signalSource;
   QLineSeries *m_series;  
   QChart *m_chart;

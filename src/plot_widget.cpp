@@ -94,12 +94,16 @@ const PlotData PlotWidget::GetPlotData() const
   return data;
 }
 
-void PlotWidget::GenerateDataFromSource(const SignalGenerator::SignalType& type)
+void PlotWidget::SelectSignalSource(SignalGenerator::SignalType type)
+{
+  m_signalType = type;
+}
+
+void PlotWidget::GenerateDataFromSource()
 {
   const float phi = static_cast <float> (rand()) / (static_cast <float>(RAND_MAX) / kfr::c_pi<float>);
-  std::cout << "phi:" << phi << std::endl;
   SignalGenerator::ComplexSignalType signal; 
-  switch(type)
+  switch(m_signalType)
   {
     case SignalGenerator::SignalType::Sine:
     {

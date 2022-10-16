@@ -16,3 +16,4 @@ target_include_directories(${PROJECT_NAME}
 )
 
 target_compile_options(${PROJECT_NAME} PUBLIC -std=gnu++17 -lstdc++fs -ggdb)
+set_property(TARGET ${PROJECT_NAME} PROPERTY AUTOMOC ON)
